@@ -6,8 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:lottie/lottie.dart';
 import 'package:statergile_todoapp/Dialogbox.dart';
+import 'package:statergile_todoapp/components/bottom_nav.dart';
 import 'package:statergile_todoapp/components/home_appbar.dart';
-import 'package:statergile_todoapp/components/rep_textfield.dart';
+import 'package:statergile_todoapp/components/todo_tile.dart';
 import 'package:statergile_todoapp/components/slider_drawer.dart';
 import 'package:statergile_todoapp/data/hive_data.dart';
 
@@ -21,7 +22,7 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
-  final List<int> testing = [];
+  final List<int> toDoList = [];
   GlobalKey<SliderDrawerState> drawerKey = GlobalKey<SliderDrawerState>();
   //hivebox
   final _myBox = Hive.box('mybox');
@@ -39,11 +40,6 @@ class _HomepageState extends State<Homepage> {
 
   //textcontrllr
   final _controller = TextEditingController();
-  //list of toDo tasks
-  // List toDoList = [
-  //   ["Workout", false],
-  //   ["Eat breakfast", false]
-  // ];
 
   //checkboxchanged
 
@@ -92,6 +88,7 @@ class _HomepageState extends State<Homepage> {
       //   title: Center(child: Text('TO DO', style: TextStyle(color: Colors.white))),
       // ),
       floatingActionButton: FloatingActionButton(
+        elevation: 5,
         backgroundColor: Colors.deepPurple,
         onPressed: createNewTask,
         child: Icon(Icons.add,color: Colors.white,),
@@ -104,9 +101,14 @@ class _HomepageState extends State<Homepage> {
         slider: CustomDrawer(),
         
        // appBar: Text('ToDo APP'),
-        child: testing.isEmpty
+        child: toDoList.isEmpty
             ? Container(
-
+              decoration: BoxDecoration(
+              
+                image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: NetworkImage('https://media.istockphoto.com/id/1173194404/id/foto/komposisi-tampilan-atas-vertikal-ruang-kerja-kantor-modern-dengan-laptop-buku-catatan-kopi-dan.jpg?s=612x612&w=0&k=20&c=YvvSmBhEyy4KKyM7I-O5pTpmZDxy0_b2xb2cik7ooug='))
+              ),
               height: 500,
               width: MediaQuery.of(context).size.width,
               child: ListView.builder(
@@ -130,7 +132,7 @@ class _HomepageState extends State<Homepage> {
                         height: 250,
                         child: Lottie.network(
                             'https://lottie.host/21c3e80b-7595-4df2-8ccd-b768c869784c/nHV4PZV9SR.json',
-                            animate: testing.isEmpty ? false : true)),
+                            animate: toDoList.isEmpty ? false : true)),
                   ),
                   FadeInUp(
                       from: 30,
@@ -144,6 +146,7 @@ class _HomepageState extends State<Homepage> {
                 ],
               ),
       ),
+      bottomNavigationBar: bottomNavBar(),
     );
   }
 }

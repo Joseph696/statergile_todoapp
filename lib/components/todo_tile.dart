@@ -29,22 +29,32 @@ class ToDotile extends StatelessWidget {
           )
         ]),
         child: Container(
+          
           padding: EdgeInsets.all(24),
           decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                blurRadius: 5,
+                blurStyle: BlurStyle.normal,
+                color: Colors.white,
+                offset: Offset(02, 02)
+              )
+            ],
               color: Colors.purple, borderRadius: BorderRadius.only(topLeft: Radius.circular(12),bottomLeft: Radius.circular(12))),
           child: Row(
             children: [
               Checkbox(
+                
                 shape: BeveledRectangleBorder(borderRadius: BorderRadius.circular(10)),
                   value: taskCompleted,
                   
                   onChanged: onChanged,
 
-                  activeColor: Colors.red),
+                  activeColor: Colors.green),
               Text(
                 taskName,
                 style: TextStyle(
-                  fontSize: 20,
+                  fontSize: 24,
                   color: Colors.white,
                   fontWeight: FontWeight.normal,
                     decoration: taskCompleted
